@@ -28,8 +28,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: 여기에 코드를 입력합니다.
 
     // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_WIN32MFD2, szWindowClass, MAX_LOADSTRING);
+   LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+   LoadStringW(hInstance, IDC_WIN32MFD2, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // 응용 프로그램 초기화를 수행합니다.
@@ -97,8 +97,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED|WS_POPUP,0,0,(int)GetSystemMetrics(SM_CXSCREEN)-20, (int)GetSystemMetrics(SM_CYSCREEN) - 20, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -123,6 +122,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	TCHAR greeting[] = _T("hello, world!");
     switch (message)
     {
     case WM_COMMAND:
@@ -147,6 +147,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다.
+			TextOut(hdc,
+				5, 5,
+				greeting, _tcslen(greeting));
             EndPaint(hWnd, &ps);
         }
         break;
