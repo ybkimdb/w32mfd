@@ -97,7 +97,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED|WS_POPUP,0,0,(int)GetSystemMetrics(SM_CXSCREEN), (int)GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
+  // HWND hWnd = CreateWindowW(szWindowClass, szTitle,WS_POPUP|WS_CHILD,0,0,(int)GetSystemMetrics(SM_CXSCREEN), (int)GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_POPUP | WS_CHILD, 0, -20, (int)GetSystemMetrics(SM_CXSCREEN), (int)GetSystemMetrics(SM_CYSCREEN)+20, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
